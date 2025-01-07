@@ -14,7 +14,7 @@ import { IUser } from '../interfaces';
 //CREATE USER & SEND MAIL FOR VERIFICATION
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { firstName, lastName, avatar, email, password } = req.body;
+        const { firstName, lastName, avatar, email, password, type } = req.body;
         //FIND EXIST USES
         const userExist = await User.exists({ email });
         if (userExist) {
@@ -25,7 +25,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
             });
         }
         //GET ROLE
-        const role = await Role.findOne({ name: RoleType.USER });
+        const role = await Role.findOne({ name: RoleType[type] });
         if (!role) {
             throw new HttpError({
                 title: 'role',
@@ -42,6 +42,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
             avatar,
             email,
             password: hashPassword,
+            type,
             role: role._id,
         });
         let savedUser = await user.save();

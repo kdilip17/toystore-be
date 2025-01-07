@@ -1,7 +1,8 @@
 //ROLE ENUMS
 export enum RoleType {
     USER = 'user',
-    ADMIN = 'admin'
+    ADMIN = 'admin',
+    PRODUCTADMIN = 'productadmin'
 }
 //USER ACCOUNT STATUS ENUMS
 export enum AccountStatus {

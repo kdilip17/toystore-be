@@ -50,7 +50,7 @@ _router.route('/update/:userId').patch(
         requiredTextField('avatar', 'Avatar', { min: 2, max: 255 }),
     ]),
     auth,
-    permit([RoleType.ADMIN, RoleType.USER]),
+    permit([RoleType.ADMIN, RoleType.USER, RoleType.PRODUCTADMIN]),
     userController.updateUser
 );
 
@@ -60,7 +60,7 @@ _router
     .get(
         validate([authorization()]),
         auth,
-        permit([RoleType.ADMIN, RoleType.USER]),
+        permit([RoleType.ADMIN, RoleType.USER, RoleType.PRODUCTADMIN]),
         userController.getUser
     );
 
@@ -70,7 +70,7 @@ _router
     .get(
         validate([authorization()]),
         auth,
-        permit([RoleType.ADMIN, RoleType.USER]),
+        permit([RoleType.ADMIN, RoleType.USER, RoleType.PRODUCTADMIN]),
         userController.getAllUser
     );
 
